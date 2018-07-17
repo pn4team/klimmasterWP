@@ -6069,3 +6069,18 @@ function wp_privacy_delete_old_export_files() {
 		}
 	}
 }
+
+/*My code*/
+function site_blocks_cpt() {
+
+ $args = array(
+ 'label'  => 'Site Blocks', //назва типу посту
+ 'public' => true,	//чи буде публічний
+ 'supports' => array('title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats') //підтримка різних полів
+ );
+
+ register_post_type( 'site_blocks', $args );
+}
+
+add_action( 'init', 'site_blocks_cpt' );
+ 
