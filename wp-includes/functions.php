@@ -6072,15 +6072,139 @@ function wp_privacy_delete_old_export_files() {
 
 /*My code*/
 function site_blocks_cpt() {
-
  $args = array(
- 'label'  => 'Site Blocks', //назва типу посту
+ 'label'  => 'Контент на головній сторінці', //назва типу посту
  'public' => true,	//чи буде публічний
- 'supports' => array('title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats') //підтримка різних полів
+ 'supports' => array('title') //підтримка різних полів
  );
-
  register_post_type( 'site_blocks', $args );
 }
 
 add_action( 'init', 'site_blocks_cpt' );
+
+function footer_form_cpt() {
+ $args = array(
+ 'label'  => 'Форма: Контент', //назва типу посту
+ 'public' => true,	//чи буде публічний
+ 'supports' => array('title') //підтримка різних полів
+ );
+ register_post_type( 'footer_form', $args );
+}
+
+add_action( 'init', 'footer_form_cpt' );
+
+function cond_page_cpt() {
+ $args = array(
+ 'label'  => 'Кондеціонери', //назва типу посту
+ 'public' => true,	//чи буде публічний
+ 'supports' => array('title') //підтримка різних полів
+ );
+ register_post_type( 'cond_page', $args );
+}
+
+add_action( 'init', 'cond_page_cpt' );
+
+function create_taxonomy(){
+	register_taxonomy('content_location', array('site_blocks'), array(
+	'label'                 => 'Розміщення контенту на головній сторінці', //назва категорії
+    'hierarchical'          => true, //якщо true то буде у вигляді категорії, якщо false - у вигляді тегів
+      
+	) );
+}
+add_action('init', 'create_taxonomy');
+
+function create_taxonomy_form(){
+	register_taxonomy('content_location_form', array('footer_form'), array(
+	'label'                 => 'Розміщення контенту у формі', //назва категорії
+    'hierarchical'          => true, //якщо true то буде у вигляді категорії, якщо false - у вигляді тегів
+      
+	) );
+}
+add_action('init', 'create_taxonomy_form');
+
+function create_taxonomy_cond_type(){
+	register_taxonomy('cond_type', array('cond_page'), array(
+	'label'                 => 'Типи кондеціонерів', //назва категорії
+    'hierarchical'          => true, //якщо true то буде у вигляді категорії, якщо false - у вигляді тегів
+      
+	) );
+}
+add_action('init', 'create_taxonomy_cond_type');
+
+
+function true_taxonomy_filter() {
+	global $typenow; // тип поста
+	if( $typenow == 'site_blocks' ){ // для каких типов постов отображать
+		$taxes = array('content_location'); // таксономии через запятую
+		foreach ($taxes as $tax) {
+			$current_tax = isset( $_GET[$tax] ) ? $_GET[$tax] : '';
+			$tax_obj = get_taxonomy($tax);
+			$tax_name = mb_strtolower($tax_obj->labels->name);
+			// функция mb_strtolower переводит в нижний регистр
+			// она может не работать на некоторых хостингах, если что, убирайте её отсюда
+			$terms = get_terms($tax);
+			if(count($terms) > 0) {
+				echo "<select name='$tax' id='$tax' class='postform'>";
+				echo "<option value=''>Все $tax_name</option>";
+				foreach ($terms as $term) {
+					echo '<option value='. $term->slug, $current_tax == $term->slug ? ' selected="selected"' : '','>' . $term->name .' (' . $term->count .')</option>'; 
+				}
+				echo "</select>";
+			}
+		}
+	}
+}
+ 
+add_action( 'restrict_manage_posts', 'true_taxonomy_filter' );
+
+function true_taxonomy_filter_form() {
+	global $typenow; // тип поста
+	if( $typenow == 'footer_form' ){ // для каких типов постов отображать
+		$taxes = array('content_location_form'); // таксономии через запятую
+		foreach ($taxes as $tax) {
+			$current_tax = isset( $_GET[$tax] ) ? $_GET[$tax] : '';
+			$tax_obj = get_taxonomy($tax);
+			$tax_name = mb_strtolower($tax_obj->labels->name);
+			// функция mb_strtolower переводит в нижний регистр
+			// она может не работать на некоторых хостингах, если что, убирайте её отсюда
+			$terms = get_terms($tax);
+			if(count($terms) > 0) {
+				echo "<select name='$tax' id='$tax' class='postform'>";
+				echo "<option value=''>Все $tax_name</option>";
+				foreach ($terms as $term) {
+					echo '<option value='. $term->slug, $current_tax == $term->slug ? ' selected="selected"' : '','>' . $term->name .' (' . $term->count .')</option>'; 
+				}
+				echo "</select>";
+			}
+		}
+	}
+}
+ 
+add_action( 'restrict_manage_posts', 'true_taxonomy_filter_form' );
+
+function true_taxonomy_filter_cond_type() {
+	global $typenow; // тип поста
+	if( $typenow == 'cond_page' ){ // для каких типов постов отображать
+		$taxes = array('cond_type'); // таксономии через запятую
+		foreach ($taxes as $tax) {
+			$current_tax = isset( $_GET[$tax] ) ? $_GET[$tax] : '';
+			$tax_obj = get_taxonomy($tax);
+			$tax_name = mb_strtolower($tax_obj->labels->name);
+			// функция mb_strtolower переводит в нижний регистр
+			// она может не работать на некоторых хостингах, если что, убирайте её отсюда
+			$terms = get_terms($tax);
+			if(count($terms) > 0) {
+				echo "<select name='$tax' id='$tax' class='postform'>";
+				echo "<option value=''>Все $tax_name</option>";
+				foreach ($terms as $term) {
+					echo '<option value='. $term->slug, $current_tax == $term->slug ? ' selected="selected"' : '','>' . $term->name .' (' . $term->count .')</option>'; 
+				}
+				echo "</select>";
+			}
+		}
+	}
+}
+ 
+add_action( 'restrict_manage_posts', 'true_taxonomy_filter_cond_type' );
+
  

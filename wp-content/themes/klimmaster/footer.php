@@ -3,12 +3,19 @@
     <div id="contact">
         <div class="container">
             <div class="row"> 
+                <?php
+                $args = array(
+                    'post_type' => 'footer_form',
+                    'name' => 'form_head'
+                );
+                query_posts($args); the_post(); ?>
                 <div class="col-lg-12 row wow fadeInDown">
                     <!--Header-->
-                    <h2>Наші контакти</h2>
-                    <p>Ви можете зв`язатися з нами по одному з телефонів, написавши нам на електронну пошту, або скориставшись формою нижче.</p>
+                    <h2><? echo get_field('form_head_main_text'); ?></h2>
+                    <p><? echo get_field('form_head_text'); ?></p>
                     <div class="line"></div>
                 </div>
+                <? wp_reset_query(); ?>
             </div>   
         </div>        <!--Contact Detail-->
         <div class="container">
@@ -16,40 +23,51 @@
                 <div class="contact-detail">    
                     <div class="row col-lg-3">
                         <!--Address-->
-                        <div class="address wow fadeInLeft">
-                            <h3 class="title">Email</h3>
-                            <p>klimmaster.ua@gmail.com</p>
+                        <div class="address wow fadeInLeft">                    
+                            <?php $postcounter = 0;
+                            $args = array(
+                                'post_type' => 'footer_form',
+                                'content_location_form' => 'form_side_mail'
+                            );
+                            query_posts($args);
+                            if ( have_posts() ) : query_posts($args); echo "<h3 class=\"title\">E-mail</h3>";
+                            while (have_posts()) : the_post(); $postcounter++; ?> 
+                            <p><? echo get_field('form_side_mail'); ?></p> 
+                            <? endwhile; endif; wp_reset_query(); ?>  
                         </div>
                         <!--Telephone-->
-                        <div class="telephone wow fadeInLeft">
-                            <h3 class="title">Телефон</h3>
-                            <p class="tel">Тел: 0686008324</p>
-                            <p class="fax">Тел: 0668941050</p>
-                            <p class="fax">Тел: 0979085857</p>
-                            <p class="fax">Тел: 0661020145</p>
+                        <div class="telephone wow fadeInLeft">                 
+                            <?php $postcounter = 0;
+                            $args = array(
+                                'post_type' => 'footer_form',
+                                'content_location_form' => 'form_side_num'
+                            );
+                            query_posts($args);
+                            if ( have_posts() ) : query_posts($args); echo "<h3 class=\"title\">Телефон</h3>";
+                            while (have_posts()) : the_post(); $postcounter++; ?> 
+                            <p class="fax">Тел: <? echo get_field('form_side_num'); ?></p> 
+                            <? endwhile; endif; wp_reset_query(); ?> 
                         </div>
                     </div>
 
                     <!--Form-->
                     <div class="row col-lg-9 wow fadeInRight">
-                        <h3>Відправити повідомлення</h3>
-                        <p>Звяжіться з нами</p>
+                        <?php
+                        $args = array(
+                            'post_type' => 'footer_form',
+                            'name' => 'form_head_min'
+                        );
+                        query_posts($args); the_post(); ?>
+                        <div class="col-lg-12 row wow fadeInDown">
+                            <!--Header-->
+                            <h3><? echo get_field('form_head_min_main_text'); ?></h3>
+                            <p><? echo get_field('form_head_min_text'); ?></p>
+                            <div class="line"></div>
+                        </div>
+                        <? wp_reset_query(); ?> 
                         <!--Name-->
-                        <div>
-                            <input type="text" name="name" id="name" placeholder="Ваше ім`я" required data-valitation-required-message="Please Enter Your Name" />                     
-                        </div>
-                        <!--Email-->
-                        <div>
-                            <input type="email" name="email" id="email" placeholder="Email" required data-validation-required-message="Please Enter Your Email" />              
-                        </div>
-                        <!--Message-->
-                        <div>
-                            <textarea rows="1" name="message" id="message" placeholder="Ваше повідомлення" required data-validation-required-message="Please Enter Your Message"></textarea>
-                        </div>
-                        <!--Button-->
-                        <div class="col-lg-12">
-                            <button class="button pull-right" onclick="contact_send();">Відправити</button>
-                        </div>
+                        <?php echo do_shortcode( '[contact-form-7 id="107" title="Contact form 1"]' ); ?>
+                        
                     </div><!--End Form-->
       
                 </div><!--End Contact Detail-->
