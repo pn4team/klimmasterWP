@@ -6104,6 +6104,17 @@ function cond_page_cpt() {
 
 add_action( 'init', 'cond_page_cpt' );
 
+function catalog_page_cpt() {
+ $args = array(
+ 'label'  => 'Каталог', //назва типу посту
+ 'public' => true,	//чи буде публічний
+ 'supports' => array('title') //підтримка різних полів
+ );
+ register_post_type( 'catalog_page', $args );
+}
+
+add_action( 'init', 'catalog_page_cpt' );
+
 function create_taxonomy(){
 	register_taxonomy('content_location', array('site_blocks'), array(
 	'label'                 => 'Розміщення контенту на головній сторінці', //назва категорії
@@ -6130,6 +6141,33 @@ function create_taxonomy_cond_type(){
 	) );
 }
 add_action('init', 'create_taxonomy_cond_type');
+
+function create_taxonomy_cond_firm(){
+	register_taxonomy('cond_firm', array('cond_page'), array(
+	'label'                 => 'Фірми кондеціонерів', //назва категорії
+    'hierarchical'          => true, //якщо true то буде у вигляді категорії, якщо false - у вигляді тегів
+      
+	) );
+}
+add_action('init', 'create_taxonomy_cond_firm');
+
+function create_taxonomy_catalog_type(){
+	register_taxonomy('catalog_type', array('catalog_page'), array(
+	'label'                 => 'Каталог:Типи', //назва категорії
+    'hierarchical'          => true, //якщо true то буде у вигляді категорії, якщо false - у вигляді тегів
+      
+	) );
+}
+add_action('init', 'create_taxonomy_catalog_type');
+
+function create_taxonomy_catalog_firm(){
+	register_taxonomy('catalog_firm', array('catalog_page'), array(
+	'label'                 => 'Каталог:Типи', //назва категорії
+    'hierarchical'          => true, //якщо true то буде у вигляді категорії, якщо false - у вигляді тегів
+      
+	) );
+}
+add_action('init', 'create_taxonomy_catalog_firm');
 
 
 function true_taxonomy_filter() {
@@ -6206,5 +6244,80 @@ function true_taxonomy_filter_cond_type() {
 }
  
 add_action( 'restrict_manage_posts', 'true_taxonomy_filter_cond_type' );
+
+function true_taxonomy_filter_cond_firm() {
+	global $typenow; // тип поста
+	if( $typenow == 'cond_page' ){ // для каких типов постов отображать
+		$taxes = array('cond_firm'); // таксономии через запятую
+		foreach ($taxes as $tax) {
+			$current_tax = isset( $_GET[$tax] ) ? $_GET[$tax] : '';
+			$tax_obj = get_taxonomy($tax);
+			$tax_name = mb_strtolower($tax_obj->labels->name);
+			// функция mb_strtolower переводит в нижний регистр
+			// она может не работать на некоторых хостингах, если что, убирайте её отсюда
+			$terms = get_terms($tax);
+			if(count($terms) > 0) {
+				echo "<select name='$tax' id='$tax' class='postform'>";
+				echo "<option value=''>Все $tax_name</option>";
+				foreach ($terms as $term) {
+					echo '<option value='. $term->slug, $current_tax == $term->slug ? ' selected="selected"' : '','>' . $term->name .' (' . $term->count .')</option>'; 
+				}
+				echo "</select>";
+			}
+		}
+	}
+}
+ 
+add_action( 'restrict_manage_posts', 'true_taxonomy_filter_cond_type' );
+
+function true_taxonomy_filter_catalog_type() {
+	global $typenow; // тип поста
+	if( $typenow == 'catalog_page' ){ // для каких типов постов отображать
+		$taxes = array('catalog_type'); // таксономии через запятую
+		foreach ($taxes as $tax) {
+			$current_tax = isset( $_GET[$tax] ) ? $_GET[$tax] : '';
+			$tax_obj = get_taxonomy($tax);
+			$tax_name = mb_strtolower($tax_obj->labels->name);
+			// функция mb_strtolower переводит в нижний регистр
+			// она может не работать на некоторых хостингах, если что, убирайте её отсюда
+			$terms = get_terms($tax);
+			if(count($terms) > 0) {
+				echo "<select name='$tax' id='$tax' class='postform'>";
+				echo "<option value=''>Все $tax_name</option>";
+				foreach ($terms as $term) {
+					echo '<option value='. $term->slug, $current_tax == $term->slug ? ' selected="selected"' : '','>' . $term->name .' (' . $term->count .')</option>'; 
+				}
+				echo "</select>";
+			}
+		}
+	}
+}
+ 
+add_action( 'restrict_manage_posts', 'true_taxonomy_filter_catalog_firm' );
+
+function true_taxonomy_filter_catalog_firm() {
+	global $typenow; // тип поста
+	if( $typenow == 'catalog_page' ){ // для каких типов постов отображать
+		$taxes = array('catalog_firm'); // таксономии через запятую
+		foreach ($taxes as $tax) {
+			$current_tax = isset( $_GET[$tax] ) ? $_GET[$tax] : '';
+			$tax_obj = get_taxonomy($tax);
+			$tax_name = mb_strtolower($tax_obj->labels->name);
+			// функция mb_strtolower переводит в нижний регистр
+			// она может не работать на некоторых хостингах, если что, убирайте её отсюда
+			$terms = get_terms($tax);
+			if(count($terms) > 0) {
+				echo "<select name='$tax' id='$tax' class='postform'>";
+				echo "<option value=''>Все $tax_name</option>";
+				foreach ($terms as $term) {
+					echo '<option value='. $term->slug, $current_tax == $term->slug ? ' selected="selected"' : '','>' . $term->name .' (' . $term->count .')</option>'; 
+				}
+				echo "</select>";
+			}
+		}
+	}
+}
+ 
+add_action( 'restrict_manage_posts', 'true_taxonomy_filter_catalog_firm' );
 
  

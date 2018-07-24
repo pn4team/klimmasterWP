@@ -45,20 +45,36 @@
                     <li class="links"><a class="scroll" href="projects.html">Проекти</a></li>
                     <li class="links dropdown">
                         <ul class="dropdown-menu sub-menu">
-                            <li><a href="cond1.html">Спліт системи</a></li>
-                            <li><a href="cond2.html">Касетні</a></li>
+                            <li><a href="<?php echo get_home_url(); ?>/cond-split/">Спліт системи</a></li>
+                            <li><a href="<?php echo get_home_url(); ?>/cond-cassette/">Касетні</a></li>
+                            <li><a href="<?php echo get_home_url(); ?>/cond-multisplit/">Мультиспліт системи</a></li>
+                            <li><a href="<?php echo get_home_url(); ?>/cond-mobile/">Мобільні</a></li>
+                            <li><a href="<?php echo get_home_url(); ?>/cond-false-ceiling/">Напольно-стелові</a></li>
                         </ul>
-                        <a href="cond1.html" data-toggle="dropdown" class="dropdown-toggle">Кондиціонери</a>
+                        <a href="<?php echo get_home_url(); ?>/cond/" data-toggle="dropdown" class="dropdown-toggle">Кондиціонери</a>
                     </li>
                     <li class="links dropdown">
                         <ul class="dropdown-menu sub-menu">
-                            <li><a href="catalog1.html">Спліт системи</a></li>
-                            <li><a href="catalog2.html">Касетні</a></li>
+                            <li><a href="<?php echo get_home_url(); ?>/catalog-split/">Спліт системи</a></li>
+                            <li><a href="<?php echo get_home_url(); ?>/catalog-cassette/">Касетні</a></li>
+                            <li><a href="<?php echo get_home_url(); ?>/catalog-multisplit/">Мультиспліт системи</a></li>
+                            <li><a href="<?php echo get_home_url(); ?>/catalog-mobile/">Мобільні</a></li>
+                            <li><a href="<?php echo get_home_url(); ?>/catalog-false-ceiling/">Напольно-стелові</a></li>
                         </ul>
-                        <a href="cond1.html" data-toggle="dropdown" class="dropdown-toggle">Каталог</a>
+                        <a href="<?php echo get_home_url(); ?>/catalog/" data-toggle="dropdown" class="dropdown-toggle">Каталог</a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
     <!--End Menu-->
+    <? if( is_home() ){ ?>
+       
+    <? } else { ?>
+    <style>
+        .navbar-custom {
+            background-color: #1D5499;
+        }
+    </style>    
+    <? } ?>
+    

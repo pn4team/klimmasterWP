@@ -1447,4 +1447,29 @@ div.wpcf7-response-output{
         display: inline-block;        
     }
 }
+#portfolio_page .wow h2{
+    margin-top: 100px;
+}
+.cbp-item{
+    text-align: center;
+}
+.cbp-item
+.cbp-l-caption-body{
+    text-align: left;
+}
+.cbp-item img{
+    display: inline-block;
+    height: 300px;
+    width: auto; 
+    margin: 0 auto;
+}
+.cbp-item {
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+/*nav.navbar{
+    background-color: #1D5499;
+}*/
 /*NP307*/

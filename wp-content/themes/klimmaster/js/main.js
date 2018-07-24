@@ -382,7 +382,10 @@ function init_map() {
 
     /*NP307*/
     setInterval(function() { $(".buyButton").toggleClass("red") }, 1000);
-
-
-
     /*NP307 end*/
+
+//
+$('#grid-container .cbp-wrapper .cbp-item').resize(function () {
+    var widthImg = $(this).find('img').width();
+    $(this).find('img').marginLeft(widthImg);
+})
