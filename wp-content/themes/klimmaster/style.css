@@ -1379,7 +1379,7 @@ textarea:hover {
 
 footer .footer-menu li.dropdown .dropdown-menu.sub-menu {
   top: -100px;
-  left: 135px;
+  left: 90px;
   height: 200px;
   background-color: #184071;
   overflow-y: auto;
@@ -1468,6 +1468,10 @@ div.wpcf7-response-output{
     -webkit-background-size: cover;
     background-size: cover;
     background-position: 50% 50%;
+}
+
+body {
+  min-width: 320px;
 }
 /*nav.navbar{
     background-color: #1D5499;

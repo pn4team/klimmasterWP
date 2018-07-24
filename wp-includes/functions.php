@@ -6153,7 +6153,7 @@ add_action('init', 'create_taxonomy_cond_firm');
 
 function create_taxonomy_catalog_type(){
 	register_taxonomy('catalog_type', array('catalog_page'), array(
-	'label'                 => 'Каталог:Типи', //назва категорії
+	'label'                 => 'Каталог: Типи', //назва категорії
     'hierarchical'          => true, //якщо true то буде у вигляді категорії, якщо false - у вигляді тегів
       
 	) );
@@ -6162,7 +6162,7 @@ add_action('init', 'create_taxonomy_catalog_type');
 
 function create_taxonomy_catalog_firm(){
 	register_taxonomy('catalog_firm', array('catalog_page'), array(
-	'label'                 => 'Каталог:Типи', //назва категорії
+	'label'                 => 'Каталог: Фірми', //назва категорії
     'hierarchical'          => true, //якщо true то буде у вигляді категорії, якщо false - у вигляді тегів
       
 	) );
@@ -6268,7 +6268,7 @@ function true_taxonomy_filter_cond_firm() {
 	}
 }
  
-add_action( 'restrict_manage_posts', 'true_taxonomy_filter_cond_type' );
+add_action( 'restrict_manage_posts', 'true_taxonomy_filter_cond_firm' );
 
 function true_taxonomy_filter_catalog_type() {
 	global $typenow; // тип поста
@@ -6293,7 +6293,7 @@ function true_taxonomy_filter_catalog_type() {
 	}
 }
  
-add_action( 'restrict_manage_posts', 'true_taxonomy_filter_catalog_firm' );
+add_action( 'restrict_manage_posts', 'true_taxonomy_filter_catalog_type' );
 
 function true_taxonomy_filter_catalog_firm() {
 	global $typenow; // тип поста

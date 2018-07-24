@@ -13,24 +13,22 @@
 
         <!-- Portfolio-->        
         <div id="filters-container" class="cbp-l-filters-alignCenter">
-        <div data-filter="*" class="cbp-filter-item-active cbp-filter-item">
-            Всі <div class="cbp-filter-counter"></div>
-        </div> /
-        <div data-filter=".saturn" class="cbp-filter-item">
-            Saturn <div class="cbp-filter-counter"></div>
-        </div> /
-        <div data-filter=".lg" class="cbp-filter-item">
-            LG <div class="cbp-filter-counter"></div>
-        </div> /
-        <div data-filter=".panasonic" class="cbp-filter-item">
-            Panasonic <div class="cbp-filter-counter"></div>
-        </div> /
-        <div data-filter=".toshiba" class="cbp-filter-item">
-            Toshiba <div class="cbp-filter-counter"></div>
-        </div> /
-        <div data-filter=".mh" class="cbp-filter-item">
-            Mitsubishi-Heavy <div class="cbp-filter-counter"></div>
-        </div>
+          <div data-filter="*" class="cbp-filter-item-active cbp-filter-item">
+              Всі <div class="cbp-filter-counter"></div>
+          </div>
+          <?php
+          $terms = get_terms( 'catalog_firm' );
+
+          if( $terms && ! is_wp_error($terms) ) {
+              foreach( $terms as $term ) {?>
+                /
+                <div data-filter=".<?php echo $term->slug ?>" class="cbp-filter-item">
+                  <?php echo $term->name ?> <div class="cbp-filter-counter"></div>
+                </div>
+
+          <?php }
+          }
+          ?>
         </div>
 
         <div id="grid-container" class="cbp">
@@ -40,8 +38,16 @@
                                 );
             query_posts($args); ?>
             <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-            
-                <div class="cbp-item mh" style="/*background-image: url(<?php echo get_field('cond_photo')['url']; ?>);*/">
+                  <div class="cbp-item <?php 
+                    $cur_terms = get_the_terms( $post->ID, 'cond_firm' );
+                    if($cur_terms) {
+                      foreach( $cur_terms as $cur_term ){
+                        echo " ".$cur_term->slug;
+                      }
+                      
+                    }
+                    
+                  ?>" style="/*background-image: url(<?php echo get_field('cond_photo')['url']; ?>);*/">
                     <a href="#" class="cbp-caption cbp-lightbox" data-title="<?php echo get_field('cond_name'); ?><br><?php echo get_field('cond_desc'); ?><br>Ціна: <?php echo get_field('cond_price'); ?> грн.">
                     <div class="cbp-caption-defaultWrap">
                         <img src="<?php echo get_field('cond_photo')['url']; ?>" alt="" style="opacity: 1;">

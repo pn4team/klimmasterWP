@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-    <title>Interior - многостраничный HTML шаблон</title>
+    <title><?php echo get_bloginfo(name) ?></title>
     <meta charset="utf-8">
     <meta class="viewport" name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -41,8 +41,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="nav">
                 <ul class="nav navbar-nav uppercase">
-                    <li class="links"><a class="scroll" href="index.html">Головна</a></li>
-                    <li class="links"><a class="scroll" href="projects.html">Проекти</a></li>
+                    <li class="links"><a class="scroll" href="<?php echo get_home_url(); ?>">Головна</a></li>
                     <li class="links dropdown">
                         <ul class="dropdown-menu sub-menu">
                             <li><a href="<?php echo get_home_url(); ?>/cond-split/">Спліт системи</a></li>

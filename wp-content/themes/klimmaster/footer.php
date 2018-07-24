@@ -81,23 +81,35 @@
         <div class="container">
             <div class="row">
                 <div class="content col-lg-12">
-                    <div class="col-lg-4">
-                        <h3>КлімМастер - 2018</h3>
+                    <div class="col-lg-8">
+                        <h3><?php echo get_bloginfo(name) ?> - <?php echo date('Y'); ?></h3>
                     </div>
-                    <div class="col-lg-6 hidden-xs hidden-sm">
+                    <div class="col-lg-4">
                         <ul class="footer-menu">
-                            <li><a href="index.html">Головна</a></li>
-                            <li><a href="projects.html">Проекти</a></li>
+                            <li><a href="<?php echo get_home_url(); ?>">Головна</a></li>
                             <li class="links dropdown">
                               <ul class="dropdown-menu sub-menu">
-                                  <li><a href="cond1.html">Спліт системи</a></li>
-                                  <li><a href="cond2.html">Касетні</a></li>
+                                <li><a href="<?php echo get_home_url(); ?>/cond-split/">Спліт системи</a></li>
+                                <li><a href="<?php echo get_home_url(); ?>/cond-cassette/">Касетні</a></li>
+                                <li><a href="<?php echo get_home_url(); ?>/cond-multisplit/">Мультиспліт системи</a></li>
+                                <li><a href="<?php echo get_home_url(); ?>/cond-mobile/">Мобільні</a></li>
+                                <li><a href="<?php echo get_home_url(); ?>/cond-false-ceiling/">Напольно-стелові</a></li>
                               </ul>
                               <a href="cond1.html" data-toggle="dropdown" class="dropdown-toggle">Кондиціонери</a>
                           </li>
+                          <li class="links dropdown">
+                              <ul class="dropdown-menu sub-menu">
+                                <li><a href="<?php echo get_home_url(); ?>/catalog-split/">Спліт системи</a></li>
+                                <li><a href="<?php echo get_home_url(); ?>/catalog-cassette/">Касетні</a></li>
+                                <li><a href="<?php echo get_home_url(); ?>/catalog-multisplit/">Мультиспліт системи</a></li>
+                                <li><a href="<?php echo get_home_url(); ?>/catalog-mobile/">Мобільні</a></li>
+                                <li><a href="<?php echo get_home_url(); ?>/catalog-false-ceiling/">Напольно-стелові</a></li>
+                              </ul>
+                              <a href="cond1.html" data-toggle="dropdown" class="dropdown-toggle">Каталог</a>
+                          </li>
                         </ul>
                     </div>
-                    <div class="col-lg-2 hidden-xs hidden-sm">
+                    <div class="col-lg-2 hidden-xs hidden-sm hidden-md hidden-lg">
                         <div class="social">
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-twitter"></i></a>

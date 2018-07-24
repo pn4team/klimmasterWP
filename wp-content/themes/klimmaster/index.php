@@ -124,23 +124,18 @@
                             <div class="boxes video wow fadeInRight col-xs-12 row ">
                                 <div class="video-picture"><img src="<?php echo get_field('text_img')[url] ?>" alt=""></div>
                                 <div class="video-box">
-                                   <h3><a class="popup-youtube buyButton red" href=""><?php echo get_field('visible_text')?></a></h3>
+                                   <h3><a class="popup-youtube buyButton red" href="#contact"><?php echo get_field('visible_text')?></a></h3>
                                     <p><?php echo get_field('text')?></p>
                                 </div>
                             </div>
 
                             <?endif; wp_reset_query(); ?>
-
-                           
-                            
-                            
                         </div>
                     </div>
                 </div><!--End Contents-->
             </div><!--End Row-->
         </div><!--End Container-->
     </div>
-    
 <style>
 /*nav.navbar{
     background-color: transparent;
@@ -148,9 +143,4 @@
 </style>
 
     <!--End Content-->
-<a href="archivea.php">asdasd</a>
-<?$term_slug = 'multisplit'; //передавать нужно альтернативное имя (slug)
-$term_link = get_term_link($term_slug, 'cond_type');
-echo "<a href='". $term_link ."'>ссылка на раздел ". $term_slug ."</a>";?>
 <?php get_footer(); ?>
-222
