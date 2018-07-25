@@ -1444,7 +1444,7 @@ div.wpcf7-response-output{
     }
     .button{
         float: none;
-        display: inline-block;        
+        display: inline-block;
     }
 }
 #portfolio_page .wow h2{
@@ -1472,7 +1472,26 @@ div.wpcf7-response-output{
 
 body {
   min-width: 320px;
+  overflow-x: hidden;
 }
+
+#contact, #portfolio_page {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.navbar-collapse {
+  height: 0;
+  -webkit-transition: .5s;
+  -o-transition: .5s;
+  transition: .5s;
+}
+.navbar-collapse.in, .navbar-collapse.collapsing {
+  height: 90vh;
+  -webkit-transition: .5s;
+  -o-transition: .5s;
+  transition: .5s;
+}
+
 /*nav.navbar{
     background-color: #1D5499;
 }*/

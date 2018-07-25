@@ -81,10 +81,10 @@
         <div class="container">
             <div class="row">
                 <div class="content col-lg-12">
-                    <div class="col-lg-8">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
                         <h3><?php echo get_bloginfo(name) ?> - <?php echo date('Y'); ?></h3>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 col-md-4 col-sm-12 hidden-xs hidden-sm hidden-md hidden-lg">
                         <ul class="footer-menu">
                             <li><a href="<?php echo get_home_url(); ?>">Головна</a></li>
                             <li class="links dropdown">
